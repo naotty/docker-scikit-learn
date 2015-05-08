@@ -72,3 +72,17 @@ COPY setup.py setup.py
 RUN python setup.py build
 RUN python setup.py install
 RUN ldconfig
+
+
+# matplotlib
+WORKDIR /root
+RUN wget http://download.savannah.gnu.org/releases/freetype/freetype-2.5.5.tar.gz
+RUN tar xzvf freetype-2.5.5.tar.gz
+
+WORKDIR freetype-2.5.5
+RUN ./configure
+RUN make
+RUN make install
+
+RUN yum install -y libpng-devel
+RUN pip install matplotlib
